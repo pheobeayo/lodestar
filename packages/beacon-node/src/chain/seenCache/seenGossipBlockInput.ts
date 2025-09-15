@@ -8,14 +8,13 @@ import {Metrics} from "../../metrics/metrics.js";
 import {IClock} from "../../util/clock.js";
 import {CustodyConfig} from "../../util/dataColumns.js";
 import {
-  BlockInput,
+  IBlockInput,
   BlockInputBlobs,
   BlockInputColumns,
   BlockInputPreData,
   BlockWithSource,
   DAType,
   ForkBlobsDA,
-  IBlockInput,
   LogMetaBasic,
   LogMetaBlobs,
   LogMetaColumns,
@@ -150,7 +149,7 @@ export class SeenBlockInput {
     this.pruneToMaxSize();
   };
 
-  getByBlock({blockRootHex, block, source, seenTimestampSec, peerIdStr}: BlockWithSource): BlockInput {
+  getByBlock({blockRootHex, block, source, seenTimestampSec, peerIdStr}: BlockWithSource): IBlockInput {
     // TODO(peerDAS): Why is it necessary to static cast this here. All conditional paths result in a valid value so should be defined correctly below
     let blockInput = this.blockInputs.get(blockRootHex) as IBlockInput;
     if (!blockInput) {
@@ -198,7 +197,7 @@ export class SeenBlockInput {
       this.metrics?.seenCache.blockInput.duplicateBlockCount.inc({source});
     }
 
-    return blockInput as BlockInput;
+    return blockInput as IBlockInput;
   }
 
   getByBlob(

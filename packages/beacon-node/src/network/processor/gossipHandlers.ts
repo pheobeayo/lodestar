@@ -23,7 +23,6 @@ import {
 } from "@lodestar/types";
 import {LogLevel, Logger, prettyBytes, toHex, toRootHex} from "@lodestar/utils";
 import {
-  BlockInput,
   BlockInputColumns,
   BlockInputSource,
   IBlockInput,
@@ -207,7 +206,7 @@ function getSequentialHandlers(modules: ValidatorFnsModules, options: GossipHand
     subnet: SubnetID,
     peerIdStr: string,
     seenTimestampSec: number
-  ): Promise<BlockInput> {
+  ): Promise<IBlockInput> {
     const blobBlockHeader = blobSidecar.signedBlockHeader.message;
     const slot = blobBlockHeader.slot;
     const fork = config.getForkName(slot);
